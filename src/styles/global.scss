@@ -1,0 +1,31 @@
+$primary: #3a7ca5;
+$text: #333;
+$muted: #999;
+$white: #fff;
+$black: #000;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  outline: none;
+  border: none;
+}
+
+body,
+button,
+input,
+textarea {
+  font: 400 1rem "Montserrat", sans-serif;
+}
+
+body {
+  color: $text;
+  background: $white;
+}

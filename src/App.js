@@ -1,7 +1,15 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Home } from './pages/Home';
+
+import './styles/global.scss'
+
 function App() {
   return (
-    <div className="App">
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={Home}></Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
