@@ -3,8 +3,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const verifyToken = require('../middlewares/verifyToken');
 const { registerValidation, loginValidation } = require('../validation/userFields');
-const { response } = require('express');
 
 router.post('/register', async (req, res) => {
   // Throw an error if the fields are not correct
@@ -69,7 +69,18 @@ router.post('/login', async (req, res) => {
 
   // Create and assign a token to user
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
+  res.header('auth-token', token).send({
+    token: token,
+  });
+});
+
+router.get('/user', verifyToken, async (req, res) => {
+  const token = req.header('auth-token');
+  const { _id } = jwt.verify(token, process.env.TOKEN_SECRET);
+
+  const userData = await User.findOne({ _id: _id });
+
+  return res.send(userData);
 });
 
 module.exports = router;
