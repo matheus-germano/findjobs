@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
   cpf: {
     type: String,
     required: true,
-    max: 9,
-    min: 9,
+    max: 11,
+    min: 11,
   },
   stack: {
     type: String,
