@@ -16,8 +16,13 @@ router.get('/list', async (req, res) => {
   return res.send(projects);
 });
 
-router.get('own-projects', (req, res) => {
+router.get('/own-projects', async (req, res) => {
+  const token = req.header('auth-token');
+  const { _id } = jwt.verify(token, process.env.TOKEN_SECRET);
 
+  const projects = await Project.find({ projectOwner: _id });
+
+  return res.status(200).send(projects);
 });
 
 router.post('/create', async (req, res) => {
