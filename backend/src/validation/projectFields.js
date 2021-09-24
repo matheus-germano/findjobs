@@ -4,7 +4,7 @@ function createProjectValidation(data) {
   const schema = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
-    techPreference: Joi.string(),
+    techPreference: Joi.string().allow(null, ''),
     repository: Joi.string().allow(null, '')
   });
 
