@@ -24,7 +24,7 @@ router.get('/own-projects', async (req, res) => {
 
   const projects = await Project.find({ projectOwner: _id });
 
-  return res.status(200).send(projects);
+  return res.status(200).json(projects);
 });
 
 router.post('/create', async (req, res) => {
@@ -32,7 +32,7 @@ router.post('/create', async (req, res) => {
   const { error } = createProjectValidation(req.body);
 
   if(error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   const token = req.header('auth-token');
@@ -49,7 +49,7 @@ router.post('/create', async (req, res) => {
   // Save new project
   try {
     const savedProject = await project.save();
-    res.status(200).send('Project created successfully');
+    res.status(200).json({ success: 'Project created successfully' });
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -60,14 +60,14 @@ router.put('/update/:id', verifyProjectId, verifyProjectOwner, async (req, res) 
   const { error } = createProjectValidation(req.body);
 
   if(error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({ error: error.details[0].message });
   }
   
   const id = req.params.id;
 
   await Project.updateOne({ _id: id }, req.body);
 
-  return res.status(200).send('Project updated successfully');
+  return res.status(200).json({ success: 'Project updated successfully' });
 });
 
 router.delete('/delete/:id', verifyProjectId, verifyProjectOwner, async (req, res) => {
@@ -75,7 +75,7 @@ router.delete('/delete/:id', verifyProjectId, verifyProjectOwner, async (req, re
 
   await Project.findOneAndDelete({ _id: id });
 
-  return res.status(200).send('Project deleted successfully');
+  return res.status(200).json({ success: 'Project deleted successfully' });
 });
 
 module.exports = router;

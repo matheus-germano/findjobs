@@ -11,12 +11,12 @@ module.exports = async function(req, res, next) {
   const project = await Project.findById(projectId);
 
   if(!project) {
-    return res.status(400).send('Project not found');
+    return res.status(404).json({ error: 'Project not found' });
   }
 
   // Verify if ser is authorized to delete the project
   if(_id !== project.projectOwner) {
-    return res.status(400).send('You are not allowed to modify this project');
+    return res.status(400).json({ error: 'You are not allowed to modify this project' });
   }
 
   return next();

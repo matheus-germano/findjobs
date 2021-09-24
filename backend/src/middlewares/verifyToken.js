@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
 
   // Verify if token exists
   if(!token) {
-    return res.status(400).send('Access denied');
+    return res.status(400).json({ error: 'Access denied' });
   }
 
   try {
@@ -16,6 +16,6 @@ module.exports = function(req, res, next) {
 
     return next();
   } catch (err) {
-    return res.status(400).send('Invalid Token');
+    return res.status(400).json({ error: 'Invalid Token' });
   }
 }

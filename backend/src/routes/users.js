@@ -11,14 +11,14 @@ router.post('/register', async (req, res) => {
   const { error } = registerValidation(req.body);
 
   if(error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   // Verify if the user is already registered
   const userAlreadyExists = await User.findOne({ cpf: req.body.cpf });
 
   if(userAlreadyExists) {
-    return res.status(400).send('CPF already exists');
+    return res.status(400).json({ error: 'CPF already exists' });
   }
 
   // Hash user password
@@ -40,9 +40,9 @@ router.post('/register', async (req, res) => {
   // Save new user
   try {
     const savedUser = await user.save();
-    res.status(200).send('User registered successfully');
+    res.status(200).json({ success: 'User registered successfully' });
   } catch (err) {
-    return res.status(400).send(err);
+    return res.status(400).json({ error: err });
   }
 });
 
@@ -50,26 +50,26 @@ router.post('/login', async (req, res) => {
   const { error } = loginValidation(req.body);
 
   if(error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({ error: error.details[0].message });
   }
 
   // Checking if the cpf exists in database
   const user = await User.findOne({ cpf: req.body.cpf });
 
   if(!user) {
-    return res.status(400).send('User not found');
+    return res.status(400).json({ error: 'User not found' });
   }
 
   // Validate password
   const isValidPassword = await bcrypt.compare(req.body.password, user.password);
 
   if(!isValidPassword) {
-    return res.status(400).send('Invalid password');
+    return res.status(400).json({ error: 'Invalid password' });
   }
 
   // Create and assign a token to user
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send({
+  res.header('auth-token', token).json({
     token: token,
   });
 });
@@ -80,7 +80,7 @@ router.get('/user', verifyToken, async (req, res) => {
 
   const userData = await User.findOne({ _id: _id });
 
-  return res.send(userData);
+  return res.json({ userData });
 });
 
 module.exports = router;

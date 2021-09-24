@@ -6,7 +6,7 @@ module.exports = async function(req, res, next) {
   isValid = await mongoose.Types.ObjectId.isValid(projectId);
 
   if(!isValid) {
-    return res.status(404).send('Project ID is not valid');
+    return res.status(404).json({ error: 'Project ID is not valid' });
   }
 
   return next();
