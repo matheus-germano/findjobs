@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // Middlewares
 const verifyToken = require('../middlewares/verifyToken');
+const verifyProjectOwner = require('../middlewares/verifyProjectOwner');
 
 // Validations
 const { createProjectValidation } = require('../validation/projectFields');
@@ -51,6 +52,18 @@ router.post('/create', async (req, res) => {
   } catch (err) {
     return res.status(400).send(err);
   }
+});
+
+router.delete('/delete/:id', verifyProjectOwner, async (req, res) => {
+  const id = req.params.id;
+
+  await Project.findOneAndDelete({ _id: id }, (err) => {
+    if(err) {
+      throw err;
+    }
+
+    return res.status(200).send('Project deleted successfully');
+  })
 });
 
 module.exports = router;
