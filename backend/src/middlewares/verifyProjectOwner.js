@@ -16,7 +16,7 @@ module.exports = async function(req, res, next) {
 
   // Verify if ser is authorized to delete the project
   if(_id !== project.projectOwner) {
-    return res.status(400).send('You are not allowed to delete this project');
+    return res.status(400).send('You are not allowed to modify this project');
   }
 
   return next();
