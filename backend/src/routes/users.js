@@ -83,4 +83,13 @@ router.get('/user', verifyToken, async (req, res) => {
   return res.json({ userData });
 });
 
+router.get('/logout', (req, res) => {
+  res.removeHeader('auth-token');
+  res.json({
+    message: 'User logged out successfully',
+  });
+
+  res.redirect('/');
+});
+
 module.exports = router;
