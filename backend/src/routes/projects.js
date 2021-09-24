@@ -55,6 +55,21 @@ router.post('/create', async (req, res) => {
   }
 });
 
+router.put('/update/:id', verifyProjectId, verifyProjectOwner, async (req, res) => {
+  // Throw an error if fields are not correct
+  const { error } = createProjectValidation(req.body);
+
+  if(error) {
+    return res.status(400).send(error.details[0].message);
+  }
+  
+  const id = req.params.id;
+
+  await Project.updateOne({ _id: id }, req.body);
+
+  return res.status(200).send('Project updated successfully');
+});
+
 router.delete('/delete/:id', verifyProjectId, verifyProjectOwner, async (req, res) => {
   const id = req.params.id;
 
