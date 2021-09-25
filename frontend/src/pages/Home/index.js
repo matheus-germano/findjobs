@@ -4,7 +4,7 @@ import { Button } from '../../components/Button'
 import './styles.scss'
 
 export function Home() {
-  return (
+    return (
     <div id="home-page">
       <div className="welcome-section">
         <h1>Bem vindo à Find Jobs.</h1>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useUser } from '../../hooks/useUser';
+
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa'
 
@@ -9,6 +11,7 @@ import './styles.scss'
 
 export function Navbar() {
   const [menuClick, setMenuClick] = useState(false)
+  const { user } = useUser();
 
   function menuHandleClick() {
     setMenuClick(!menuClick)
@@ -23,18 +26,31 @@ export function Navbar() {
         </div>
         <div className="nav-menu-wrapper">
           <ul className={ menuClick ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <Link to="/" exact className="nav-link">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/classes" className="nav-link">Aulas</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/projects" className="nav-link">Projetos</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contact" className="nav-link">Contato</Link>
-            </li>
+            { user ? (
+              <>
+                <li className="nav-item">
+                  <Link to="/" exact className="nav-link">Home</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/classes" className="nav-link">Aulas</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/projects" className="nav-link">Projetos</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/contact" className="nav-link">Contato</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to='/login' className="nav-link">Log in</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to='/register' className="nav-link">Register</Link>
+                </li>
+              </>
+            ) }
           </ul>
         </div>
       </div>
