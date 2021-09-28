@@ -15,3 +15,15 @@ export const FakeProjects = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
 ];
+
+export const Classes = [
+  {
+    link: 'https://www.youtube.com/embed/qJaA5VrtN0c',
+  },
+  {
+    link: 'https://www.youtube.com/embed/6idFzvD4pz0',
+  },
+  {
+    link: 'https://www.youtube.com/embed/f--RjIOcZ_s',
+  },
+];

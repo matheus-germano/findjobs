@@ -2,7 +2,12 @@
 
 .sidebarWrapper {
   height: 100%;
-  width: 600px;
+  width: 100vw;
+
+  opacity: 0;
+  background: rgba($black, 0.5);
+
+  transition: all 0.5s ease;
 
   .sidebar {
     height: 100%;
@@ -16,7 +21,7 @@
 
     position: fixed;
 
-    transition: 0.5s;
+    transition: all 0.5s ease;
 
     .sidebarHeader {
       width: 100%;
@@ -71,9 +76,13 @@
   }
 
   .sidebar.active {
-    z-index: 1;
-    transition: all 0.5s ease;
+    z-index: 999;
     opacity: 1;
     right: 0;
   }
+}
+
+.sidebarWrapper.active {
+  position: fixed;
+  opacity: 1;
 }

@@ -8,8 +8,8 @@ import './styles.scss';
 
 export function Sidebar({ isActive, setSidebarActive }) {
   return(
-    <div className="sidebarWrapper">
-      <div className={ isActive ? 'sidebar active' : 'sidebar' }>
+    <div className={ isActive ? "sidebarWrapper active" : "sidebarWrapper" }>
+      <div className={ isActive ? "sidebar active" : "sidebar" }>
         <div className="sidebarHeader">
           <FaTimes onClick={() => setSidebarActive(false)} />
         </div>
