@@ -44,10 +44,10 @@ export function Navbar() {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link to='/login' className="nav-link">Log in</Link>
+                  <Link to='/login' className="nav-link">Entrar</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to='/register' className="nav-link">Register</Link>
+                  <Link to='/register' className="nav-link">Cadastrar</Link>
                 </li>
               </>
             ) }

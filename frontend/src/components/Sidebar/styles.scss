@@ -1,0 +1,79 @@
+@import "../../styles/global.scss";
+
+.sidebarWrapper {
+  height: 100%;
+  width: 600px;
+
+  .sidebar {
+    height: 100%;
+    width: 600px;
+    background: $white;
+
+    display: flex;
+    flex-direction: column;
+    right: -100%;
+    opacity: 0;
+
+    position: fixed;
+
+    transition: 0.5s;
+
+    .sidebarHeader {
+      width: 100%;
+      height: 100px;
+
+      padding: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      svg {
+        font-size: 2rem;
+        cursor: pointer;
+        color: $primary;
+      }
+    }
+
+    .sidebarBody {
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      gap: 50px;
+
+      h1 {
+        font-size: 4rem;
+      }
+
+      .loginForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        gap: 30px;
+      }
+
+      button {
+        width: 350px;
+        background: $primary;
+        color: $white;
+      }
+
+      a {
+        color: $primary;
+      }
+    }
+  }
+
+  .sidebar.active {
+    z-index: 1;
+    transition: all 0.5s ease;
+    opacity: 1;
+    right: 0;
+  }
+}

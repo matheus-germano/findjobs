@@ -1,0 +1,58 @@
+@import "../../styles/global.scss";
+
+.projectCard {
+  width: 300px;
+  height: 500px;
+
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba($black, 0.04);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px;
+
+  .cardHeader {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid $muted;
+    padding: 10px;
+
+    img {
+      width: 128px;
+      height: 128px;
+
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 1rem;
+    }
+
+    p {
+      color: $muted;
+    }
+  }
+
+  .cardBody {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 10px;
+    padding: 10px;
+
+    text-align: justify;
+
+    button {
+      margin-top: auto;
+
+      border-color: $text;
+      color: $text;
+    }
+  }
+}
