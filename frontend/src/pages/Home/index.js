@@ -6,9 +6,11 @@ import { useUser } from '../../hooks/useUser';
 import { Button } from '../../components/Button'
 import { ProjectCard } from '../../components/ProjectCard'
 import { Sidebar } from '../../components/Sidebar';
+import { ReviewCard } from '../../components/ReviewCard';
 
 import { FakeProjects } from './data';
 import { Classes } from './data';
+import { Reviews } from './data';
 
 import './styles.scss';
 
@@ -16,6 +18,7 @@ export function Home() {
   const history = useHistory();
   const { user } = useUser();
   const [sidebarActive, setSidebarActive] = useState(false);
+  const [formType, setFormType] = useState('');
 
   function handleRedirectUserToProjects() {
     if(user) {
@@ -35,7 +38,12 @@ export function Home() {
 
   return (
     <>
-      <Sidebar isActive={sidebarActive} setSidebarActive={setSidebarActive}/>
+      <Sidebar 
+        formType={formType} 
+        setFormType={setFormType}
+        isActive={sidebarActive} 
+        setSidebarActive={setSidebarActive}
+      />
       <div id="home-page">
         <div className="welcome-section">
           <h1>Bem vindo à Find Jobs.</h1>
@@ -43,11 +51,21 @@ export function Home() {
           <div className="buttons">
             <Button 
               isOutlined
-              onClick={() => setSidebarActive(true)}
+              onClick={() => {
+                setSidebarActive(true);
+                setFormType('login');
+              }}
             >
               Entrar
             </Button>
-            <Button>Cadastrar</Button>
+            <Button
+              onClick={() => {
+                setSidebarActive(true);
+                setFormType('register');
+              }}
+            >
+              Cadastrar
+            </Button>
           </div>
         </div>
 
@@ -88,6 +106,21 @@ export function Home() {
                 <Button onClick={handleRedirectUserToClasses}>Acesse mais aulas</Button>
               </div>
             </div>
+        </div>
+
+        <div className="reviews-section">
+          <div className="reviews-wrapper">
+            <h1>Opiniões</h1>
+            <p>Veja o que as outras pessoas estão achando da plataforma.</p>
+
+            <div className="card-wrapper">
+              {
+                Reviews.map((review, index) => (
+                  <ReviewCard review={review} key={index}/>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     </>
