@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     max: 255,
   },
+  img: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -23,7 +27,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: true,
+    required: false,
     max: 11,
     min: 11,
   },
@@ -35,7 +39,7 @@ const userSchema = new mongoose.Schema({
   },
   stack: {
     type: String,
-    required: true,
+    required: false,
   },
   experience: {
     type: String,

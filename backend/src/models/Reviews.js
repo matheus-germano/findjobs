@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const opinionsSchema = new mongoose.Schema({
+const reviewsSchema = new mongoose.Schema({
   projectOwner: {
     type: String,
     required: true,
@@ -17,4 +17,4 @@ const opinionsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Opinions', opinionsSchema);
+module.exports = mongoose.model('Reviews', reviewsSchema);
