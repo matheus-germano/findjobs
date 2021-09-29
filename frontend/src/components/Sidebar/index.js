@@ -37,9 +37,13 @@ export function Sidebar({ formType, setFormType, isActive, setSidebarActive }) {
                   <form className="form">
                     <Input type="text" placeholder="Seu nome" />
                     <Input type="text" placeholder="Seu CPF" />
+                    <Input type="text" placeholder="Seu e-mail" />
                     <Input type="password" placeholder="Sua senha" />
+                    <div className="profile-image">
+                      <label htmlFor="img">Foto de perfil</label>
+                      <Input type="file" name="img" id="img" />
+                    </div>
                     <Input type="text" placeholder="Seu Github" />
-                    <Input type="text" placeholder="Seu celular" />
                     <OutsideClickHandler
                       onOutsideClick={() => {
                         setOpen(false);

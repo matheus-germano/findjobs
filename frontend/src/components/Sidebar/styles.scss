@@ -48,7 +48,7 @@
       align-items: center;
       justify-content: center;
 
-      gap: 50px;
+      gap: 30px;
 
       h1 {
         font-size: 4rem;
@@ -61,6 +61,17 @@
         align-items: center;
 
         gap: 30px;
+      }
+
+      .profile-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        input {
+          padding: 10px 20px;
+        }
       }
 
       button {
