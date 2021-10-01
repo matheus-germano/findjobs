@@ -3,7 +3,7 @@ import { IoIosArrowDropdown, IoIosArrowDropdownCircle } from 'react-icons/io';
 
 import './styles.scss';
 
-export function Dropdown({ items, open, setOpen }) {
+export function Dropdown({ items, open, setOpen, setExperience }) {
   const [selectedItem, setSelectedItem] = useState('');
 
   function toggleOpen() {
@@ -27,6 +27,7 @@ export function Dropdown({ items, open, setOpen }) {
                     key={item.id}
                     onClick={() => {
                       setSelectedItem(item.value);
+                      setExperience(item.value);
                       setOpen(!open);
                     }}
                     >
