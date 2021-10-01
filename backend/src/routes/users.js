@@ -2,11 +2,29 @@ const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 
 const verifyToken = require('../middlewares/verifyToken');
 const { registerValidation, loginValidation } = require('../validation/userFields');
+const { request } = require('express');
 
-router.post('/register', async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/images/profiles');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  limits: { 
+    fieldSize: 1024 * 1024 * 3 
+  }
+});
+
+router.post('/register', upload.single('img'), async (req, res) => {
   // Throw an error if the fields are not correct
   const { error } = registerValidation(req.body);
 
@@ -28,12 +46,11 @@ router.post('/register', async (req, res) => {
   // Create a new user
   const user = new User({
     name: req.body.name,
+    img: request.file.filename,
     email: req.body.email,
     password: hashedPassword,
     github: req.body.github,
-    phoneNumber: req.body.phoneNumber,
     cpf: req.body.cpf,
-    stack: req.body.stack,
     experience: req.body.experience,
   });
 
