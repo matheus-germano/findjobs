@@ -6,7 +6,6 @@ const multer = require('multer');
 
 const verifyToken = require('../middlewares/verifyToken');
 const { registerValidation, loginValidation } = require('../validation/userFields');
-const { request } = require('express');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
